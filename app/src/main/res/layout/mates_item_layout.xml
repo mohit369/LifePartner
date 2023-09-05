@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/edit_text_bg"
+    android:elevation="6dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginStart="@dimen/_8sdp"
+    android:layout_marginEnd="@dimen/_8sdp">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/img_front"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        app:civ_border_width="0dp"/>
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/profile_image"
+        app:layout_constraintStart_toEndOf="@id/profile_image"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:text="Sourabh Sharma"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        android:textSize="@dimen/_14sdp"
+        android:fontFamily="@font/redhat_medium"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/profile_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/profile_name"
+        app:layout_constraintStart_toEndOf="@id/profile_image"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:text="26 Years, jaipur"
+        android:textSize="@dimen/_10sdp"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/redhat_regular"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/profile_hobbies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/profile_age"
+        app:layout_constraintStart_toEndOf="@id/profile_image"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:text="Hobbies : "
+        android:textSize="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:fontFamily="@font/redhat_medium"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/hobbies"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/profile_hobbies"
+        app:layout_constraintBottom_toBottomOf="@id/profile_hobbies"
+        app:layout_constraintStart_toEndOf="@id/profile_hobbies"
+        android:text="Writing, Cooking"
+        android:textSize="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/redhat_regular"
+        android:textColor="@color/black"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

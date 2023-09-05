@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/_140sdp"
+        android:layout_height="@dimen/_160sdp"
+        app:cardCornerRadius="10dp"
+        android:background="@color/white"
+        app:cardElevation="6dp">
+
+        <ImageView
+            android:id="@+id/trusted_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/img_bg"
+            android:scaleType="center"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/trusted_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GK Wedding Planner"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:maxEms="7"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/redhat_regular"
+        android:textSize="@dimen/_12sdp"/>
+
+</LinearLayout>

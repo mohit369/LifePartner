@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "887242322671",
+    "project_id": "lifepartner-fb51e",
+    "storage_bucket": "lifepartner-fb51e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887242322671:android:2e9b67a8bbe1b6c19e611a",
+        "android_client_info": {
+          "package_name": "com.newlifepartner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "887242322671-6hhs3ha31shd4f4t111t2tg6v3jdf0hq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.newlifepartner",
+            "certificate_hash": "1801cd750c4c1af1515d1ec56e7acf9b9bb5c833"
+          }
+        },
+        {
+          "client_id": "887242322671-10a914blcugm3ejsotkbuh085sem1ub3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDod9b5fWWmbl8uRin8rivj2n76cxFIC6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "887242322671-10a914blcugm3ejsotkbuh085sem1ub3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

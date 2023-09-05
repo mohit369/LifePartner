@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="text_gray">#4A4A4A</color>
+    <color name="text_gray_edt">#99D3D2D2</color>
+    <color name="colorPrimary">#5FAEA4</color>
+    <color name="colorPrimarySemi">#655FAEA4</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="semiBlack">#80000000</color>
+    <color name="connect_green">#3CA746</color>
+</resources>

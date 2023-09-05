@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">LifePartner</string>
+    <string name="are_you_a_vendor">Are you a Vendor? <font color="#6DBFBA">Click Here</font></string>
+    <string name="next">Next</string>
+    <string name="join_now">Join Now</string>
+    <string name="login">Login</string>
+    <string name="onboarding_title_1">Find Your match</string>
+    <string name="onboarding_title_2">its time to find the wedding vendor</string>
+    <string name="onboarding_title_3">Don”t  Wait, Go Inside</string>
+    <string name="onboarding_description_1">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.</string>
+    <string name="onboarding_description_2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.</string>
+    <string name="onboarding_description_3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.</string>
+    <string name="please_sign_up_to_continue">Please <b> Sign up </b> to continue.</string>
+    <string name="welcome">Welcome!</string>
+    <string name="full_name">Full name</string>
+    <string name="register">Register</string>
+    <string name="i_have_read_and_agreed_to_the_terms_conditions">I have read and agreed to the <font color="#6DBFBA"><u><b>Terms &amp; Conditions</b></u></font></string>
+    <string name="contact_person_name">Contact Person Name</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="mobile_number">Mobile number</string>
+    <string name="already_an_account">Already an account? <font color="#6DBFBA">Sign In</font></string>
+    <string name="dont_have_account">Don\'t have an account? <font color="#6DBFBA">Sign Up</font></string>
+    <string name="dont_receive_otp">Didn\'t receive an OTP ? <font color="#6DBFBA">Resend OTP</font></string>
+    <string name="verification_code">Verification Code</string>
+    <string name="enter_your_mobile_number">Enter your <b>Mobile number</b> to continue</string>
+    <string name="continue_txt">Continue</string>
+    <string name="verification_code_sent"><b>Verification code </b>sent to your mobile number..</string>
+    <string name="verify">Verify</string>
+    <string name="profile">Profile</string>
+    <string name="match">Match</string>
+    <string name="vendor">Vendor</string>
+    <string name="home">Home</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="find_your_best_match">Find Your Best Match…</string>
+    <string name="mobile_number_dot">Mobile number…</string>
+    <string name="what_are_you_looking_for">What are you looking for ?</string>
+    <string name="verified_mates">Verified Mates</string>
+    <string name="find_wedding_vendor">Find Wedding Vendor</string>
+    <string name="see_more">See More</string>
+    <string name="trusted_vendors_for_wedding">Trusted Vendors for Wedding</string>
+    <string name="your_best_match">Your Best Match</string>
+    <string name="best_vendors_for_you">Best Vendors For You</string>
+    <string name="default_notification_channel_id">com.newlifepartner</string>
+    <string name="navigation_drawer_open">Open_drawer</string>
+    <string name="navigation_drawer_close">close_drawer</string>
+
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>others</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true"
+    android:layout_height="match_parent"
+    tools:context=".activity.SignUpActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"/>
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="@dimen/_40sdp"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintTop_toBottomOf="@id/ic_back"
+            app:layout_constraintBottom_toTopOf="@id/bottom_layout"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="20dp"/>
+
+        <LinearLayout
+            android:id="@+id/bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:background="@drawable/signup_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/_40sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/verification_code"
+                android:textColor="@color/black"
+                android:layout_marginStart="@dimen/_22sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:fontFamily="@font/redhat_semibold"
+                android:textSize="@dimen/_25sdp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/verification_code_sent"
+                android:textColor="@color/text_gray"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_22sdp"
+                android:fontFamily="@font/redhat_medium"
+                android:textSize="@dimen/_12sdp"/>
+
+
+            <in.aabhasjindal.otptextview.OtpTextView
+                android:id="@+id/otp_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                app:height="@dimen/_45sdp"
+                app:width="@dimen/_40sdp"
+                app:otp_box_background="@drawable/edit_text_bg"
+                app:box_margin="@dimen/_4sdp"
+                android:paddingBottom="4dp"
+                app:length="4"
+                android:layout_marginStart="@dimen/_22sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:otp_text_size="@dimen/_20sdp"/>
+
+
+            <TextView
+                android:id="@+id/btn_verify"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_38sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:gravity="center"
+                android:text="@string/verify"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/redhat_semibold"
+                android:textSize="@dimen/_14ssp"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:background="@drawable/edit_text_bg"
+                android:backgroundTint="@color/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@id/are_you_vendor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/dont_receive_otp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_20ssp"
+                android:text="@string/dont_receive_otp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/redhat_semibold" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
