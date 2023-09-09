@@ -7,10 +7,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,14 +43,12 @@ import com.newlifepartner.utils.safeApiCall
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.File
+import java.io.ByteArrayOutputStream
 
 
 class EditProfileFragment : Fragment() {
@@ -348,21 +349,22 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun uploadImage(uris: List<Uri>) {
-        val files = mutableListOf<MultipartBody.Part>()
+        val files = mutableListOf<String>()
         val userId = preferences.getStringValue(Constant.USER_ID)
         // Convert each selected image Uri to a file and create a MultipartBody.Part
         for (uri in uris) {
-            val file = File(getRealPathFromURI(requireContext(), uri))
-            val requestFile: RequestBody = file.asRequestBody("image/*".toMediaType())
-            val part: MultipartBody.Part =
-                MultipartBody.Part.createFormData("photo[]", file.name, requestFile)
-            files.add(part)
+            val bm = BitmapFactory.decodeFile(getRealPathFromURI(requireContext(), uri))
+            val baos = ByteArrayOutputStream()
+            bm.compress(Bitmap.CompressFormat.JPEG, 100, baos) // bm is the bitmap object
+            val b = baos.toByteArray()
+            val encodedImage: String = Base64.encodeToString(b, Base64.DEFAULT)
+            files.add(encodedImage)
         }
         lifecycleScope.launch(Dispatchers.IO + ExceptionHandlerCoroutine.handler) {
             val response: ResultType<ResponseSignUp> = safeApiCall {
                 ApiService.retrofitService.uploadImage(
                     file = files,
-                    userId = userId.toRequestBody()
+                    userId = userId
                 )
             }
             withContext(Dispatchers.Main) {

@@ -70,6 +70,9 @@ class VendorFragment : Fragment() {
                                 binding.noDataFound.visibility = View.GONE
                             }
                             vendorAdapter.updateList(vendorList)
+                        }else{
+                            binding.vendorRv.visibility = View.GONE
+                            binding.noDataFound.visibility = View.VISIBLE
                         }
                     }
                     is ResultType.Error -> {

@@ -1,5 +1,6 @@
 package com.newlifepartner.fragment
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -29,6 +30,9 @@ import com.newlifepartner.utils.safeApiCall
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 class VendorDetailFragment : Fragment() {
@@ -38,12 +42,14 @@ class VendorDetailFragment : Fragment() {
     private val args by navArgs<VendorDetailFragmentArgs>()
     private lateinit var imageList: ArrayList<Image>
     private var cat = "0"
+    private val currentDate = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentVendorDetailBinding.inflate(layoutInflater)
+
         if (NetworkUtils.isNetworkAvailable(requireContext())) {
             callGetVendorApi()
         }else{
@@ -77,6 +83,31 @@ class VendorDetailFragment : Fragment() {
         builder.setView(binding.root)
         val dialog = builder.create()
         builder.setCancelable(true)
+        val year = currentDate.get(Calendar.YEAR)
+        val month = currentDate.get(Calendar.MONTH)
+        val day = currentDate.get(Calendar.DAY_OF_MONTH)
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, selectedYear, selectedMonth, selectedDay ->
+                // This code will be executed when a date is selected
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(selectedYear, selectedMonth, selectedDay)
+
+                // Format the selected date as needed
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val formattedDate = dateFormat.format(selectedDate.time)
+
+                // Display the selected date in the EditText
+                binding.functionEdt.setText(formattedDate)
+            },
+            year, month, day
+        )
+
+        binding.functionEdt.setOnClickListener {
+            datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+            datePickerDialog.show()
+        }
+
 
         binding.btnSend.setOnClickListener {
             val name = binding.nameEdt.text.toString()

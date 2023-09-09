@@ -10,6 +10,7 @@ import com.newlifepartner.modal.MatchProfile
 import com.newlifepartner.modal.ResponseDashboard
 import com.newlifepartner.modal.ResponseSignUp
 import com.newlifepartner.modal.UserDetailModal
+import com.newlifepartner.modal.UserRequest
 import com.newlifepartner.modal.Users
 import com.newlifepartner.modal.Vendor
 import okhttp3.MultipartBody
@@ -111,8 +112,12 @@ interface APIInterface {
     @POST("User_Request_Update")
     suspend fun updateRequest(@Field("user_id") userId: String,@Field("request_to") requestedTo: String,@Field("status") status: String): Response<ResponseSignUp>
 
-    @Multipart
+    @FormUrlEncoded
+    @POST("Get_User_Contact")
+    suspend fun getUserContact(@Field("user_id") userId: String,@Field("status") status: String): Response<UserRequest>
+
     @POST("User_Galler_Add")
-    suspend fun uploadImage(@Part("user_id") userId:RequestBody, @Part file: List<MultipartBody.Part>): Response<ResponseSignUp>
+    @FormUrlEncoded
+    suspend fun uploadImage(@Field("user_id") userId:String, @Field("photo[]") file: List<String>): Response<ResponseSignUp>
 
 }

@@ -20,6 +20,7 @@ import com.newlifepartner.modal.MatchProfile
 import com.newlifepartner.modal.ResponseDashboard
 import com.newlifepartner.modal.ResponseSignUp
 import com.newlifepartner.modal.UserDetailModal
+import com.newlifepartner.modal.UserRequest
 import com.newlifepartner.network.ApiService
 import com.newlifepartner.utils.Constant
 import com.newlifepartner.utils.ExceptionHandlerCoroutine
@@ -55,6 +56,7 @@ class UserDetailsFragment : Fragment() {
        // binding.interestedRv.adapter = interestedAdapter
 
         if (NetworkUtils.isNetworkAvailable(requireContext())) {
+            checkUserRequest()
             callGetUserApi()
         }else{
             binding.progressBar.visibility = View.GONE
@@ -92,6 +94,29 @@ class UserDetailsFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    private fun checkUserRequest() {
+        lifecycleScope.launch(Dispatchers.IO+ ExceptionHandlerCoroutine.handler) {
+            val response : ResultType<UserRequest> = safeApiCall { ApiService.retrofitService.getUserContact(args.id,"pending") }
+            withContext(Dispatchers.Main) {
+                binding.progressBar.visibility = View.GONE
+                binding.detailsLayout.visibility = View.VISIBLE
+                when (response) {
+                    is ResultType.Success -> {
+                        if (response.value.status) {
+                            if (response.value.data[0].status == "pending") {
+                                binding.connect.visibility = View.GONE
+                                binding.requested.visibility = View.VISIBLE
+                            }
+                        }
+                    }
+                    is ResultType.Error -> {
+
+                    }
+                }
+            }
+        }
     }
 
     private fun sentConnectRequest() {
