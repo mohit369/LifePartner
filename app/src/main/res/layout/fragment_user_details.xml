@@ -429,7 +429,7 @@
                     android:background="@drawable/edit_text_bg"
                     android:backgroundTint="#5FAEA4"
                     android:gravity="center"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:padding="10dp">
 
                     <ImageView

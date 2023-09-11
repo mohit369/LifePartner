@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.newlifepartner.MainActivity
 import com.newlifepartner.R
 import com.newlifepartner.databinding.ActivityOtpBinding
@@ -29,6 +32,7 @@ class OtpActivity : AppCompatActivity() {
     private var number:String? = null
     private lateinit var progressDialog: CustomProgressBar
     private lateinit var prefrences:MySharedPreferences
+    private var token = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +41,7 @@ class OtpActivity : AppCompatActivity() {
         number = intent.getStringExtra("number")
         progressDialog = CustomProgressBar(this)
         prefrences = MySharedPreferences.getInstance(this)
+        getFirebaseToken()
 
         binding.btnVerify.setOnClickListener {
 
@@ -78,6 +83,18 @@ class OtpActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(ev)
     }
 
+    private fun getFirebaseToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            val token = task.result
+            Log.d("TAG", token.toString())
+            this.token = token
+        })
+    }
+
 
     private fun callOTPSentAPI(mobileNo : String) {
         progressDialog.show()
@@ -105,7 +122,7 @@ class OtpActivity : AppCompatActivity() {
     private fun verifyOtp(mobileNo : String, otp :String) {
         progressDialog.show()
         lifecycleScope.launch(Dispatchers.IO+ ExceptionHandlerCoroutine.handler) {
-            val response : ResultType<ResponseSignUp> = safeApiCall { ApiService.retrofitService.verifyOTP(mobileNo,otp) }
+            val response : ResultType<ResponseSignUp> = safeApiCall { ApiService.retrofitService.verifyOTP(mobileNo,otp,token) }
             runOnUiThread {
                 progressDialog.dismiss()
                 when (response) {

@@ -97,8 +97,9 @@ class UserDetailsFragment : Fragment() {
     }
 
     private fun checkUserRequest() {
+        val userId = MySharedPreferences.getInstance(requireContext()).getStringValue(Constant.USER_ID)
         lifecycleScope.launch(Dispatchers.IO+ ExceptionHandlerCoroutine.handler) {
-            val response : ResultType<UserRequest> = safeApiCall { ApiService.retrofitService.getUserContact(args.id,"pending") }
+            val response : ResultType<UserRequest> = safeApiCall { ApiService.retrofitService.getUserContact(userId,args.id) }
             withContext(Dispatchers.Main) {
                 binding.progressBar.visibility = View.GONE
                 binding.detailsLayout.visibility = View.VISIBLE
@@ -107,7 +108,16 @@ class UserDetailsFragment : Fragment() {
                         if (response.value.status) {
                             if (response.value.data[0].status == "pending") {
                                 binding.connect.visibility = View.GONE
+                                binding.chat.visibility = View.GONE
                                 binding.requested.visibility = View.VISIBLE
+                            }else if (response.value.data[0].status == "accept"){
+                                binding.connect.visibility = View.GONE
+                                binding.chat.visibility = View.VISIBLE
+                                binding.requested.visibility = View.GONE
+                            }else if (response.value.data[0].status == "reject"){
+                                binding.connect.visibility = View.VISIBLE
+                                binding.chat.visibility = View.GONE
+                                binding.requested.visibility = View.GONE
                             }
                         }
                     }

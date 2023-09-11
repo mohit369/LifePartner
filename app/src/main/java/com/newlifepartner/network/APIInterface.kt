@@ -36,7 +36,7 @@ interface APIInterface {
 
     @FormUrlEncoded
     @POST("User_OTP_Verify")
-    suspend fun verifyOTP(@Field("mobile_no") mobileNo: String, @Field("otp") otp: String): Response<ResponseSignUp>
+    suspend fun verifyOTP(@Field("mobile_no") mobileNo: String, @Field("otp") otp: String, @Field("fcm_token") fcmToken: String): Response<ResponseSignUp>
 
     @FormUrlEncoded
     @POST("Banner")
@@ -113,8 +113,8 @@ interface APIInterface {
     suspend fun updateRequest(@Field("user_id") userId: String,@Field("request_to") requestedTo: String,@Field("status") status: String): Response<ResponseSignUp>
 
     @FormUrlEncoded
-    @POST("Get_User_Contact")
-    suspend fun getUserContact(@Field("user_id") userId: String,@Field("status") status: String): Response<UserRequest>
+    @POST("Get_Singleuser_Contact")
+    suspend fun getUserContact(@Field("user_id") userId: String,@Field("request_to") requestTo: String): Response<UserRequest>
 
     @POST("User_Galler_Add")
     @FormUrlEncoded

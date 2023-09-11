@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && !isNotificationPermissionGranted()) {
             requestNotificationPermission()
         }
-        getFirebaseToken()
         navView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_home -> {
@@ -103,25 +102,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
 
-    }
-
-    private fun getFirebaseToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
-            val token = task.result
-            Log.d("TAG", token.toString())
-            sentTokentoServer(token)
-        })
-    }
-
-    private fun sentTokentoServer(token : String) {
-        val id = preferences.getStringValue(Constant.USER_ID)
-        lifecycleScope.launch(Dispatchers.IO+ ExceptionHandlerCoroutine.handler) {
-            val response : ResultType<ResponseSignUp> = safeApiCall { ApiService.retrofitService.sentToken(token, id,"contact") }
-        }
     }
 
     private fun isNotificationPermissionGranted(): Boolean {
@@ -226,10 +206,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
         if (!isBack){
             finish()
             finishAffinity()
+        }else{
+            super.onBackPressed()
         }
     }
 
