@@ -55,7 +55,7 @@ class VendorFragment : Fragment() {
     private fun callGetUserDetailApi() {
         binding.progressBar.visibility = View.VISIBLE
         lifecycleScope.launch(Dispatchers.IO+ ExceptionHandlerCoroutine.handler) {
-            val response : ResultType<ResponseDashboard<Vendor>> = safeApiCall { ApiService.retrofitService.getSearchVendor("0","10",args.category,args.city) }
+            val response : ResultType<ResponseDashboard<Vendor>> = safeApiCall { ApiService.retrofitService.getSearchVendor("0","100",args.category,args.city) }
             withContext(Dispatchers.Main) {
                 binding.progressBar.visibility = View.GONE
                 when (response) {

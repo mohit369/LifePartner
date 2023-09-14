@@ -209,6 +209,7 @@ class EditProfileFragment : Fragment() {
 
         if (name.isEmpty() || age.isEmpty() || bio.isEmpty() || interested.isEmpty() || hobbies.isEmpty() || cast.isEmpty() || religion.isEmpty()||relationship.isEmpty()||selectedCountry.isEmpty()||type.isEmpty()){
             Toast.makeText(requireContext(), "Please fill all the details", Toast.LENGTH_SHORT).show()
+            progressDialog.dismiss()
             return
         }
 

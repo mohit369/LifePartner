@@ -60,7 +60,7 @@ class MatchFragment : Fragment() {
     private fun callMatchUsersAPI() {
         binding.progressBar.visibility = View.VISIBLE
         lifecycleScope.launch(Dispatchers.IO+ ExceptionHandlerCoroutine.handler) {
-            val response : ResultType<ResponseDashboard<MatchProfile>> = safeApiCall { ApiService.retrofitService.getSearchUsers("0","10",argument.gender,argument.age,argument.city) }
+            val response : ResultType<ResponseDashboard<MatchProfile>> = safeApiCall { ApiService.retrofitService.getSearchUsers("0","100",argument.gender,argument.age,argument.city) }
             withContext(Dispatchers.Main) {
                 binding.progressBar.visibility = View.GONE
                 when (response) {
