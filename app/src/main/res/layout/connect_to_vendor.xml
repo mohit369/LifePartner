@@ -126,7 +126,7 @@
         android:id="@+id/budget_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Budget"
+        android:text="Function Budget"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_20sdp"
         android:textColor="@color/black"
@@ -135,6 +135,34 @@
 
     <EditText
         android:id="@+id/budget_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:background="@drawable/edit_text_bg"
+        android:backgroundTint="#F4F4F4"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/redhat_regular"
+        android:inputType="numberDecimal"
+        android:imeOptions="actionNext"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/_12sdp"
+        android:dropDownWidth="match_parent"/>
+
+    <TextView
+        android:id="@+id/location_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/redhat_medium"
+        android:textSize="@dimen/_12sdp"/>
+
+    <EditText
+        android:id="@+id/location_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"

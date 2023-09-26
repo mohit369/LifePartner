@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -36,6 +37,8 @@ class VerifiedMatesAdapter(val list: ArrayList<Users>,val navController: NavCont
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (!list[position].photo.isNullOrEmpty()) {
             Glide.with(holder.itemView.context).load(list[position].photo).into(holder.image)
+        }else{
+            holder.image.setImageDrawable(ResourcesCompat.getDrawable(holder.itemView.context.resources,R.drawable.img_front,null))
         }
         list[position].name?.let { holder.name.text = it }
 

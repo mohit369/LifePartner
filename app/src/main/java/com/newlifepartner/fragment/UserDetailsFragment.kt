@@ -49,12 +49,6 @@ class UserDetailsFragment : Fragment() {
     ): View? {
         binding = FragmentUserDetailsBinding.inflate(layoutInflater)
 
-       // hobbiesAdapter = HobbiesAdapter(ArrayList())
-       // interestedAdapter = HobbiesAdapter(ArrayList())
-
-       // binding.hobbiesRv.adapter = hobbiesAdapter
-       // binding.interestedRv.adapter = interestedAdapter
-
         if (NetworkUtils.isNetworkAvailable(requireContext())) {
             checkUserRequest()
             callGetUserApi()
@@ -171,11 +165,15 @@ class UserDetailsFragment : Fragment() {
                                 binding.relationshipStatus.text = profile.relationshipStatus
                                 binding.religion.text = profile.religion
                                 binding.cast.text = profile.caste
-                                binding.hobbiesProfile.text = profile.hobbies
-                                binding.interestedProfile.text = profile.interest
                                 imageList.addAll(profile.images)
                                 userImageAdapter = UserImageAdapter(imageList)
                                 binding.imageViewPager.adapter = userImageAdapter
+                                val hbList = profile.hobbies?.split(",")?.toList()?: ArrayList()
+                                val interestedList = profile.interest?.split(",")?.toList()?: ArrayList()
+                                 hobbiesAdapter = HobbiesAdapter(hbList as ArrayList<String>)
+                                 interestedAdapter = HobbiesAdapter(interestedList as ArrayList<String>)
+                                binding.hobbiesRv.adapter = hobbiesAdapter
+                                binding.interestedRv.adapter = interestedAdapter
                             }
                         }else{
                             binding.noDataFound.visibility = View.VISIBLE

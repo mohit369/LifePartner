@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.newlifepartner.MainActivity
 import com.newlifepartner.R
 import com.newlifepartner.activity.LoginActivity
+import com.newlifepartner.adapter.HobbiesAdapter
 import com.newlifepartner.adapter.UserImageAdapter
 import com.newlifepartner.databinding.FragmentProfileBinding
 import com.newlifepartner.modal.DataXX
@@ -34,6 +35,8 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var preferences:MySharedPreferences
     private lateinit var userImageAdapter: UserImageAdapter
+    private lateinit var hobbiesAdapter: HobbiesAdapter
+    private lateinit var interestedAdapter: HobbiesAdapter
     private lateinit var imageList:ArrayList<Image>
     private var data:DataXX? = null
 
@@ -107,6 +110,12 @@ class ProfileFragment : Fragment() {
                                 imageList.addAll(profile.images)
                                 userImageAdapter = UserImageAdapter(imageList)
                                 binding.imageViewPager.adapter = userImageAdapter
+                                val hbList = profile.hobbies?.split(",")?.toList()?: ArrayList()
+                                val interestedList = profile.interest?.split(",")?.toList()?: ArrayList()
+                                hobbiesAdapter = HobbiesAdapter(hbList as ArrayList<String>)
+                                interestedAdapter = HobbiesAdapter(interestedList as ArrayList<String>)
+                                binding.hobbiesRv.adapter = hobbiesAdapter
+                                binding.interestedRv.adapter = interestedAdapter
                             }
                         }else{
                             binding.noDataFound.visibility = View.VISIBLE

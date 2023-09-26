@@ -175,27 +175,8 @@
                 android:textSize="@dimen/_14sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dob_layout" />
-            <TextView
-                android:id="@+id/hobbies_profile"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cricket"
-                android:textSize="@dimen/_10sdp"
-                android:fontFamily="@font/redhat_regular"
-                android:textColor="@color/black"
-                android:padding="6dp"
-                android:paddingStart="20dp"
-                app:layout_constraintTop_toBottomOf="@id/hobbies_txt"
-                app:layout_constraintStart_toStartOf="parent"
-                android:paddingEnd="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginStart="@dimen/_18sdp"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/button_rectangle_bg"/>
 
-            <!--  <androidx.recyclerview.widget.RecyclerView
+              <androidx.recyclerview.widget.RecyclerView
                   android:id="@+id/hobbies_rv"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -204,7 +185,7 @@
                   android:orientation="horizontal"
                   app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                   app:layout_constraintTop_toBottomOf="@id/hobbies_txt"
-                  tools:listitem="@layout/hobbies_item_layout" />-->
+                  tools:listitem="@layout/hobbies_item_layout" />
 
             <TextView
                 android:id="@+id/interested_txt"
@@ -218,29 +199,10 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/hobbies_profile" />
+                app:layout_constraintTop_toBottomOf="@id/hobbies_rv" />
 
-            <TextView
-                android:id="@+id/interested_profile"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cricket"
-                android:textSize="@dimen/_10sdp"
-                android:fontFamily="@font/redhat_regular"
-                android:textColor="@color/black"
-                android:padding="6dp"
-                android:paddingStart="20dp"
-                app:layout_constraintTop_toBottomOf="@id/interested_txt"
-                app:layout_constraintStart_toStartOf="parent"
-                android:paddingEnd="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginStart="@dimen/_18sdp"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/button_rectangle_bg"/>
 
-            <!--   <androidx.recyclerview.widget.RecyclerView
+               <androidx.recyclerview.widget.RecyclerView
                    android:id="@+id/interested_rv"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
@@ -249,7 +211,7 @@
                    android:orientation="horizontal"
                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                    app:layout_constraintTop_toBottomOf="@id/interested_txt"
-                   tools:listitem="@layout/hobbies_item_layout" />-->
+                   tools:listitem="@layout/hobbies_item_layout" />
 
 
 
@@ -263,7 +225,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:weightSum="6"
-                app:layout_constraintTop_toBottomOf="@id/interested_profile">
+                app:layout_constraintTop_toBottomOf="@id/interested_rv">
 
                 <LinearLayout
                     android:layout_width="match_parent"

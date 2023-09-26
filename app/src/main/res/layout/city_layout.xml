@@ -11,6 +11,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="@dimen/_6sdp"
+        android:visibility="gone"
         android:src="@drawable/menu_icon"/>
 
     <TextView
@@ -22,7 +23,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:text="Jaipur"
         android:textColor="@color/black"
-        android:fontFamily="@font/redhat_medium"
+        android:fontFamily="@font/redhat_regular"
         android:textSize="@dimen/_14sdp" />
 
 </LinearLayout>

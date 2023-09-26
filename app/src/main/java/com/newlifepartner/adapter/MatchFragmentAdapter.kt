@@ -3,6 +3,7 @@ package com.newlifepartner.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -29,10 +30,22 @@ class MatchFragmentAdapter(var list: ArrayList<MatchProfile>, val navController:
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        list[position].name?.let {  holder.binding.profileName.text = it }
-        list[position].age?.let {  holder.binding.profileAge.text = "$it Years, ${list[position].city}" }
-        list[position].hobbies?.let {  holder.binding.hobbies.text = it }
-        list[position].photo?.let {  Glide.with(holder.itemView.context).load(list[position].photo).into(holder.binding.profileImage)}
+        if (list[position].name != null && !list[position].name.isNullOrBlank()) {
+            holder.binding.profileName.text = list[position].name
+        }
+        if (list[position].age != null && !list[position].age.isNullOrBlank()) {
+            holder.binding.profileAge.text = "${list[position].age} Years, ${list[position].city}"
+        }
+        if (list[position].hobbies != null && !list[position].hobbies.isNullOrBlank()) {
+            holder.binding.hobbies.text = list[position].hobbies
+        }
+        if (list[position].photo != null && !list[position].photo.isNullOrBlank()) {
+                Glide.with(holder.itemView.context).load(list[position].photo)
+                    .into(holder.binding.profileImage)
+        }else{
+            holder.binding.profileImage.setImageDrawable(ResourcesCompat.getDrawable(holder.itemView.context.resources,R.drawable.img_front,null))
+        }
+
 
         holder.itemView.setOnClickListener {
             val action = MatchFragmentDirections.actionActionMatchToUserDetailsFragment(list[position].id)

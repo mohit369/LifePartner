@@ -25,11 +25,11 @@ class HobbiesAdapter (val hobbiesList: ArrayList<String>) : RecyclerView.Adapter
     }
 
     override fun getItemCount(): Int {
-        return 4
+        return hobbiesList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-      //holder.hobbies.text = hobbiesList[position]
+      holder.hobbies.text = hobbiesList[position]
     }
 
 }

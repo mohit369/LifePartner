@@ -99,7 +99,7 @@ class OtpActivity : AppCompatActivity() {
     private fun callOTPSentAPI(mobileNo : String) {
         progressDialog.show()
         lifecycleScope.launch(Dispatchers.IO+ ExceptionHandlerCoroutine.handler) {
-            val response : ResultType<ResponseSignUp> = safeApiCall { ApiService.retrofitService.otpSent("$91$mobileNo") }
+            val response : ResultType<ResponseSignUp> = safeApiCall { ApiService.retrofitService.otpSent("$mobileNo") }
             runOnUiThread {
                 progressDialog.dismiss()
                 when (response) {

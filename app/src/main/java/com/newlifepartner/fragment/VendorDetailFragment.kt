@@ -165,6 +165,7 @@ class VendorDetailFragment : Fragment() {
                                 imageList.addAll(vendors.images)
                                 userImageAdapter = UserImageAdapter(imageList)
                                 binding.imageViewPager.adapter = userImageAdapter
+                                binding.startingBudget.text = vendors.startingBudget
                             }
                         }else{
                             binding.noDataFound.visibility = View.VISIBLE

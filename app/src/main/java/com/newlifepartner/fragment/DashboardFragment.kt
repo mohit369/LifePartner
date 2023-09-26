@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -140,10 +141,25 @@ class DashboardFragment : Fragment() {
             }
         }
 
-        binding.btnSearch.setOnClickListener {
-            val age = binding.ageEdt.text.toString()
+        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                // Update the TextView with the current SeekBar progress
+                binding.age.text = "$progress"
+            }
 
-            if (age.isEmpty() || type.isEmpty() || selectedCountry.isEmpty()){
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                // Handle the start of SeekBar tracking (e.g., save initial value)
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                // Handle the end of SeekBar tracking (e.g., use the final value)
+            }
+        })
+
+        binding.btnSearch.setOnClickListener {
+            val age = binding.age.text.toString()
+
+            if (age.equals("0",true) || type.isEmpty() || selectedCountry.isEmpty()){
                 Toast.makeText(requireContext(), "Please fill all the details", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

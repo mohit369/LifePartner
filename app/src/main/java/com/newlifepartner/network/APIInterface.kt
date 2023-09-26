@@ -118,6 +118,6 @@ interface APIInterface {
 
     @POST("User_Galler_Add")
     @FormUrlEncoded
-    suspend fun uploadImage(@Field("user_id") userId:String, @Field("files") file: List<String>): Response<ResponseSignUp>
+    suspend fun uploadImage(@Field("user_id") userId:String, @Field("file") file: List<String>): Response<ResponseSignUp>
 
 }
