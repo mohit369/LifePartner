@@ -92,10 +92,10 @@ class ProfileFragment : Fragment() {
             val response : ResultType<UserDetailModal> = safeApiCall { ApiService.retrofitService.getUsersById(userId) }
             withContext(Dispatchers.Main) {
                 binding.progressBar.visibility = View.GONE
-                binding.detailsLayout.visibility = View.VISIBLE
                 when (response) {
                     is ResultType.Success -> {
                         if (response.value.status){
+                            binding.detailsLayout.visibility = View.VISIBLE
                             response.value.data.apply {
                                 data = this
                                 binding.username.text = profile.name
@@ -119,10 +119,12 @@ class ProfileFragment : Fragment() {
                             }
                         }else{
                             binding.noDataFound.visibility = View.VISIBLE
+                            binding.detailsLayout.visibility = View.GONE
                         }
                     }
                     is ResultType.Error -> {
                         binding.noDataFound.visibility = View.VISIBLE
+                        binding.detailsLayout.visibility = View.GONE
                         Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT).show()
                     }
                 }

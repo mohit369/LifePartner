@@ -2,6 +2,7 @@ package com.newlifepartner.fragment
 
 import android.Manifest
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
@@ -49,19 +50,25 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 class EditProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentEditProfileBinding
     val gender = arrayOf("Male", "Female", "Others")
+    val status = arrayOf("Single","Divorce", "Widow", "Whether not say")
     var cityList:ArrayList<City> = ArrayList()
     private lateinit var preferences: MySharedPreferences
     private var selectedCountry = ""
+    private var relationShipStatus = ""
     private var type = ""
     private val args by navArgs<EditProfileFragmentArgs>()
     private lateinit var progressDialog: CustomProgressBar
     private val imageUriList = mutableListOf<Uri>()
+    private val currentDate = Calendar.getInstance()
 
 
     override fun onCreateView(
@@ -74,6 +81,26 @@ class EditProfileFragment : Fragment() {
         checkPermission()
         setUpInitialValues()
         setUpData()
+
+        val year = currentDate.get(Calendar.YEAR)
+        val month = currentDate.get(Calendar.MONTH)
+        val day = currentDate.get(Calendar.DAY_OF_MONTH)
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, selectedYear, selectedMonth, selectedDay ->
+                // This code will be executed when a date is selected
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(selectedYear, selectedMonth, selectedDay)
+
+                // Format the selected date as needed
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val formattedDate = dateFormat.format(selectedDate.time)
+
+                // Display the selected date in the EditText
+                binding.ageEdt.setText(formattedDate)
+            },
+            year, month, day
+        )
 
         binding.btnSave.setOnClickListener {
             progressDialog.show()
@@ -88,6 +115,10 @@ class EditProfileFragment : Fragment() {
         binding.img2.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             imagePickerLauncher2.launch(intent)
+        }
+
+        binding.ageEdt.setOnClickListener {
+            datePickerDialog.show()
         }
 
         binding.img3.setOnClickListener {
@@ -192,7 +223,6 @@ class EditProfileFragment : Fragment() {
             binding.hobbiesEdt.setText(it.hobbies)
             binding.castEdt.setText(it.caste)
             binding.religionEdt.setText(it.religion)
-            binding.relationshipEdt.setText(it.relationshipStatus)
         }
     }
 
@@ -205,16 +235,16 @@ class EditProfileFragment : Fragment() {
         val hobbies = binding.hobbiesEdt.text.toString()
         val cast = binding.castEdt.text.toString()
         val religion = binding.religionEdt.text.toString()
-        val relationship = binding.relationshipEdt.text.toString()
 
-        if (name.isEmpty() || age.isEmpty() || bio.isEmpty() || interested.isEmpty() || hobbies.isEmpty() || cast.isEmpty() || religion.isEmpty()||relationship.isEmpty()||selectedCountry.isEmpty()||type.isEmpty()){
+
+        if (name.isEmpty() || age.isEmpty() || bio.isEmpty() || interested.isEmpty() || hobbies.isEmpty() || cast.isEmpty() || religion.isEmpty()||relationShipStatus.isEmpty()||selectedCountry.isEmpty()||type.isEmpty()){
             Toast.makeText(requireContext(), "Please fill all the details", Toast.LENGTH_SHORT).show()
             progressDialog.dismiss()
             return
         }
 
         lifecycleScope.launch(Dispatchers.IO+ ExceptionHandlerCoroutine.handler) {
-            val response : ResultType<ResponseSignUp> = safeApiCall { ApiService.retrofitService.updateUserDetail(userId,name,age,type,bio,interested,hobbies,relationship,cast,religion,selectedCountry) }
+            val response : ResultType<ResponseSignUp> = safeApiCall { ApiService.retrofitService.updateUserDetail(userId,name,age,type,bio,interested,hobbies,relationShipStatus,cast,religion,selectedCountry) }
             withContext(Dispatchers.Main) {
                progressDialog.dismiss()
                 when (response) {
@@ -237,6 +267,8 @@ class EditProfileFragment : Fragment() {
         cityList = (requireActivity() as MainActivity).cityList
         val genderAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1,gender)
         binding.genderSpinner.adapter = genderAdapter
+        val relationshipAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1,status)
+        binding.relationshipSpinner.adapter = relationshipAdapter
 
         val cityAdapter = CountrySpinnerAdapter(requireContext(),cityList)
         binding.citySpinner.adapter = cityAdapter
@@ -245,6 +277,7 @@ class EditProfileFragment : Fragment() {
         }
         binding.citySpinner.setSelection(position)
         binding.genderSpinner.setSelection(genderAdapter.getPosition(args.profile?.profile?.gender))
+        binding.relationshipSpinner.setSelection(genderAdapter.getPosition(args.profile?.profile?.relationshipStatus))
 
 
         binding.citySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -260,6 +293,16 @@ class EditProfileFragment : Fragment() {
         binding.genderSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 type = gender[position]
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
+        binding.relationshipSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                relationShipStatus = status[position]
 
             }
 
