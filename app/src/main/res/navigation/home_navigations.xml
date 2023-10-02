@@ -25,6 +25,10 @@
                 android:name="city"
                 android:defaultValue=""
                 app:argType="string"/>
+            <argument
+                android:name="showDialog"
+                android:defaultValue="true"
+                app:argType="boolean"/>
         </action>
         <action
             android:id="@+id/action_action_home_to_action_vendor"
@@ -37,6 +41,10 @@
                 android:name="category"
                 android:defaultValue=""
                 app:argType="string"/>
+            <argument
+                android:name="showDialog"
+                android:defaultValue="true"
+                app:argType="boolean"/>
         </action>
         <action
             android:id="@+id/action_action_home_to_userDetailsFragment"
@@ -69,6 +77,10 @@
             android:name="category"
             android:defaultValue=""
             app:argType="string"/>
+        <argument
+            android:name="showDialog"
+            android:defaultValue="true"
+            app:argType="boolean"/>
         <action
             android:id="@+id/action_action_vendor_to_vendorDetailFragment"
             app:destination="@id/vendorDetailFragment">
@@ -95,6 +107,10 @@
             android:name="city"
             android:defaultValue=""
             app:argType="string"/>
+        <argument
+            android:name="showDialog"
+            android:defaultValue="true"
+            app:argType="boolean"/>
         <action
             android:id="@+id/action_action_match_to_userDetailsFragment"
             app:destination="@id/userDetailsFragment">

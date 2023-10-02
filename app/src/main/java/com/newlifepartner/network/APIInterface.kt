@@ -7,6 +7,7 @@ import com.newlifepartner.modal.DataX
 import com.newlifepartner.modal.GetVendorDetailModal
 import com.newlifepartner.modal.HistoryModal
 import com.newlifepartner.modal.MatchProfile
+import com.newlifepartner.modal.NotificationModel
 import com.newlifepartner.modal.ResponseDashboard
 import com.newlifepartner.modal.ResponseSignUp
 import com.newlifepartner.modal.UserDetailModal
@@ -119,5 +120,9 @@ interface APIInterface {
     @POST("User_Galler_Add")
     @FormUrlEncoded
     suspend fun uploadImage(@Field("user_id") userId:String, @Field("file") file: List<String>): Response<ResponseSignUp>
+
+    @FormUrlEncoded
+    @POST("Fetch_Notifications")
+    suspend fun getNotification(@Field("user_id") id: String,@Field("user_type") type: String): Response<NotificationModel>
 
 }

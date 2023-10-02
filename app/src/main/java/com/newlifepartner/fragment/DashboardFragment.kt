@@ -65,6 +65,7 @@ class DashboardFragment : Fragment() {
     private var age = ""
     private var type = ""
     private var cityList:ArrayList<City> = ArrayList()
+    var showDialog = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -95,12 +96,12 @@ class DashboardFragment : Fragment() {
         }
 
         binding.seeMoreVerified.setOnClickListener {
-            val action = DashboardFragmentDirections.actionActionHomeToActionMatch("0","","")
+            val action = DashboardFragmentDirections.actionActionHomeToActionMatch("0","","",showDialog)
             findNavController().navigate(action)
         }
 
         binding.seeMoreTrusted.setOnClickListener {
-            val action = DashboardFragmentDirections.actionActionHomeToActionVendor("")
+            val action = DashboardFragmentDirections.actionActionHomeToActionVendor("","",showDialog)
             findNavController().navigate(action)
         }
 
@@ -166,7 +167,8 @@ class DashboardFragment : Fragment() {
             if (dialog.isShowing) {
                 dialog.dismiss()
             }
-            val action = DashboardFragmentDirections.actionActionHomeToActionMatch(age,type,selectedCountry)
+            showDialog = false
+            val action = DashboardFragmentDirections.actionActionHomeToActionMatch(age,type,selectedCountry,showDialog)
             findNavController().navigate(action)
 
         }
@@ -207,7 +209,8 @@ class DashboardFragment : Fragment() {
             if (dialog.isShowing) {
                 dialog.dismiss()
             }
-            val action = DashboardFragmentDirections.actionActionHomeToActionVendor(selectedCountryVendor,id)
+            showDialog = false
+            val action = DashboardFragmentDirections.actionActionHomeToActionVendor(selectedCountryVendor,id,showDialog)
             findNavController().navigate(action)
 
         }
@@ -369,6 +372,7 @@ class DashboardFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        showDialog = true
         (requireActivity() as MainActivity).setHomeIcon()
     }
 

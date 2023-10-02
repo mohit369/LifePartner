@@ -28,6 +28,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 import com.newlifepartner.activity.ChatActivity
+import com.newlifepartner.activity.NotificationActivity
 import com.newlifepartner.databinding.ActivityMainBinding
 import com.newlifepartner.modal.City
 import com.newlifepartner.modal.ResponseSignUp
@@ -99,6 +100,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }else{
                 binding.drawerLayout.openDrawer(GravityCompat.START)
             }
+        }
+
+        binding.notification.setOnClickListener {
+            startActivity(Intent(this,NotificationActivity::class.java))
         }
 
 

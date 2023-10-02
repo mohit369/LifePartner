@@ -166,6 +166,11 @@ class VendorDetailFragment : Fragment() {
                                 userImageAdapter = UserImageAdapter(imageList)
                                 binding.imageViewPager.adapter = userImageAdapter
                                 binding.startingBudget.text = vendors.startingBudget
+                                if (vendors.packageX.equals("Free",true)){
+                                    binding.premiumTxt.visibility = View.GONE
+                                }else{
+                                    binding.premiumTxt.visibility = View.VISIBLE
+                                }
                             }
                         }else{
                             binding.noDataFound.visibility = View.VISIBLE

@@ -89,7 +89,16 @@ class VendorFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        showVendorCityDialog()
+        if (args.showDialog) {
+            showVendorCityDialog()
+        }else{
+            if (NetworkUtils.isNetworkAvailable(requireContext())) {
+                selectedCountryVendor = args.city
+                callGetUserDetailApi()
+            }else{
+                Toast.makeText(requireContext(), "No internet connection", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun showVendorCityDialog() {
