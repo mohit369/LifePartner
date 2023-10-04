@@ -15,6 +15,7 @@ import com.newlifepartner.MainActivity
 import com.newlifepartner.R
 import com.newlifepartner.databinding.ActivityOtpBinding
 import com.newlifepartner.modal.ResponseSignUp
+import com.newlifepartner.modal.VerifyOtpModal
 import com.newlifepartner.network.ApiService
 import com.newlifepartner.utils.Constant
 import com.newlifepartner.utils.CustomProgressBar
@@ -122,7 +123,7 @@ class OtpActivity : AppCompatActivity() {
     private fun verifyOtp(mobileNo : String, otp :String) {
         progressDialog.show()
         lifecycleScope.launch(Dispatchers.IO+ ExceptionHandlerCoroutine.handler) {
-            val response : ResultType<ResponseSignUp> = safeApiCall { ApiService.retrofitService.verifyOTP(mobileNo,otp,token) }
+            val response : ResultType<VerifyOtpModal> = safeApiCall { ApiService.retrofitService.verifyOTP(mobileNo,otp,token) }
             runOnUiThread {
                 progressDialog.dismiss()
                 when (response) {
@@ -130,9 +131,12 @@ class OtpActivity : AppCompatActivity() {
                         if (response.value.status){
                             Toast.makeText(this@OtpActivity, response.value.message, Toast.LENGTH_SHORT).show()
                             prefrences.saveBooleanValue(Constant.KEY_LOGIN,true)
-                            response.value.userId?.let {
-                                prefrences.saveStringValue(Constant.USER_ID,response.value.userId)
+                            response.value.data.id?.let {
+                                prefrences.saveStringValue(Constant.USER_ID,it)
                             }
+                            prefrences.saveStringValue(Constant.NAME,"${response.value.data.firstName} ${response.value.data.lastName}")
+                            prefrences.saveStringValue(Constant.PHONE,response.value.data.mobileNo)
+                            prefrences.saveStringValue(Constant.EMAIL,response.value.data.email)
                             startActivity(Intent(this@OtpActivity,MainActivity::class.java))
                         }else{
                             Toast.makeText(this@OtpActivity, response.value.message, Toast.LENGTH_SHORT).show()

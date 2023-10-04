@@ -13,6 +13,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.mohammedalaa.seekbar.DoubleValueSeekBarView
+import com.mohammedalaa.seekbar.OnDoubleValueSeekBarChangeListener
 import com.newlifepartner.MainActivity
 import com.newlifepartner.adapter.CountrySpinnerAdapter
 import com.newlifepartner.adapter.MatchFragmentAdapter
@@ -115,25 +117,24 @@ class MatchFragment : Fragment() {
             }
         }
 
-        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                // Update the TextView with the current SeekBar progress
-                binding.age.text = "$progress"
+        binding.doubleRangeSeekbar.setOnRangeSeekBarViewChangeListener(object :
+            OnDoubleValueSeekBarChangeListener {
+            override fun onValueChanged(seekBar: DoubleValueSeekBarView?, min: Int, max: Int, fromUser: Boolean) {
+                binding.ageMin.text = min.toString()
+                binding.ageMax.text = max.toString()
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-                // Handle the start of SeekBar tracking (e.g., save initial value)
+            override fun onStartTrackingTouch(seekBar: DoubleValueSeekBarView?, min: Int, max: Int) {
             }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-                // Handle the end of SeekBar tracking (e.g., use the final value)
+            override fun onStopTrackingTouch(seekBar: DoubleValueSeekBarView?, min: Int, max: Int) {
             }
         })
 
         binding.btnSearch.setOnClickListener {
-            val age = binding.age.text.toString()
+            val age = "${binding.ageMin.text} - ${binding.ageMax.text}"
 
-            if (age.equals("0",true) || type.isEmpty() || selectedCountry.isEmpty()){
+            if (age.equals("0 - 0",true) || type.isEmpty() || selectedCountry.isEmpty()){
                 Toast.makeText(requireContext(), "Please fill all the details", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

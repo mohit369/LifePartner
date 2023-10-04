@@ -17,10 +17,22 @@
         android:background="#5FAEA4"
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/white"
-        android:text="@string/your_best_match"/>
+        android:text="Chat"/>
+
+    <ImageView
+        android:id="@+id/ic_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/ic_back_black"
+        app:tint="@color/white"
+        app:layout_constraintTop_toTopOf="@id/top_lay"
+        app:layout_constraintBottom_toBottomOf="@id/top_lay"
+        android:layout_marginStart="14dp"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/match_rv"
+        android:id="@+id/chat_history_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingTop="10dp"
@@ -29,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@id/top_lay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/mates_item_layout"/>
+        tools:listitem="@layout/chat_history_item_layout"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -48,12 +60,13 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="No Data Found"
+        android:text="No Chat Found"
         android:gravity="center"
         android:visibility="gone"
         android:textColor="@color/black"
         android:fontFamily="@font/redhat_medium"
         android:textSize="@dimen/_18sdp"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

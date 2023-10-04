@@ -277,7 +277,7 @@ class EditProfileFragment : Fragment() {
         }
         binding.citySpinner.setSelection(position)
         binding.genderSpinner.setSelection(genderAdapter.getPosition(args.profile?.profile?.gender))
-        binding.relationshipSpinner.setSelection(genderAdapter.getPosition(args.profile?.profile?.relationshipStatus))
+        binding.relationshipSpinner.setSelection(relationshipAdapter.getPosition(args.profile?.profile?.relationshipStatus))
 
 
         binding.citySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

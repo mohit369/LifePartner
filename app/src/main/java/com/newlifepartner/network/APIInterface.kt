@@ -1,5 +1,6 @@
 package com.newlifepartner.network
 
+import com.newlifepartner.modal.ChatHistoryModal
 import com.newlifepartner.modal.ChatModal
 import com.newlifepartner.modal.City
 import com.newlifepartner.modal.Data
@@ -14,6 +15,7 @@ import com.newlifepartner.modal.UserDetailModal
 import com.newlifepartner.modal.UserRequest
 import com.newlifepartner.modal.Users
 import com.newlifepartner.modal.Vendor
+import com.newlifepartner.modal.VerifyOtpModal
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -37,7 +39,7 @@ interface APIInterface {
 
     @FormUrlEncoded
     @POST("User_OTP_Verify")
-    suspend fun verifyOTP(@Field("mobile_no") mobileNo: String, @Field("otp") otp: String, @Field("fcm_token") fcmToken: String): Response<ResponseSignUp>
+    suspend fun verifyOTP(@Field("mobile_no") mobileNo: String, @Field("otp") otp: String, @Field("fcm_token") fcmToken: String): Response<VerifyOtpModal>
 
     @FormUrlEncoded
     @POST("Banner")
@@ -124,5 +126,9 @@ interface APIInterface {
     @FormUrlEncoded
     @POST("Fetch_Notifications")
     suspend fun getNotification(@Field("user_id") id: String,@Field("user_type") type: String): Response<NotificationModel>
+
+    @FormUrlEncoded
+    @POST("Get_User_Contact")
+    suspend fun chatHistory(@Field("request_to") id: String,@Field("status") type: String): Response<ChatHistoryModal>
 
 }

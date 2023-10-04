@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
@@ -23,7 +24,9 @@ import com.newlifepartner.modal.ResponseDashboard
 import com.newlifepartner.modal.ResponseSignUp
 import com.newlifepartner.modal.UserDetailModal
 import com.newlifepartner.network.ApiService
+import com.newlifepartner.utils.Constant
 import com.newlifepartner.utils.ExceptionHandlerCoroutine
+import com.newlifepartner.utils.MySharedPreferences
 import com.newlifepartner.utils.NetworkUtils
 import com.newlifepartner.utils.ResultType
 import com.newlifepartner.utils.safeApiCall
@@ -103,10 +106,20 @@ class VendorDetailFragment : Fragment() {
             year, month, day
         )
 
+        binding.nameEdt.setText(MySharedPreferences.getInstance(requireContext()).getStringValue(Constant.NAME))
+        binding.contactEdt.setText(MySharedPreferences.getInstance(requireContext()).getStringValue(Constant.PHONE))
+        binding.emailEdt.setText(MySharedPreferences.getInstance(requireContext()).getStringValue(Constant.EMAIL))
+
         binding.functionEdt.setOnClickListener {
             datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
             datePickerDialog.show()
         }
+        val budgetList = arrayOf("Upto 1 Lac",
+                "1 Lac to 3 Lacs",
+                "3 Lacs to 5 Lacs",
+                "Above 5 Lacs")
+        val genderAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1,budgetList)
+        binding.budgetSpinner.adapter = genderAdapter
 
 
         binding.btnSend.setOnClickListener {
@@ -114,7 +127,7 @@ class VendorDetailFragment : Fragment() {
             val contactNo = binding.contactEdt.text.toString()
             val email = binding.emailEdt.text.toString()
             val function = binding.functionEdt.text.toString()
-            val budget = binding.budgetEdt.text.toString()
+            val budget = binding.budgetSpinner.selectedItem.toString()
             val vendorId = args.id
 
             if (name.isEmpty() || contactNo.isEmpty() || email.isEmpty() || function.isEmpty() || budget.isEmpty()){

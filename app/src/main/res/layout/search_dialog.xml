@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/edit_text_bg"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
@@ -23,7 +24,27 @@
             android:textSize="@dimen/_14sdp"/>
 
         <TextView
-            android:id="@+id/age"
+            android:id="@+id/age_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/redhat_regular"
+            android:textSize="@dimen/_14sdp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/redhat_regular"
+            android:textSize="@dimen/_14sdp"/>
+        <TextView
+            android:id="@+id/age_max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
@@ -35,13 +56,24 @@
 
     </LinearLayout>
 
-    <SeekBar
-        android:id="@+id/seekBar"
+    <com.mohammedalaa.seekbar.DoubleValueSeekBarView
+        android:id="@+id/double_range_seekbar"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:r2CurrentMaxValue="100"
+        app:r2CurrentMinValue="0"
+        app:r2barHeight="4dp"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:progress="0" />
+        android:layout_marginStart="@dimen/_10sdp"
+        app:r2baseColor="@color/gray"
+        app:r2circleFillColor="#3F51B5"
+        app:r2circleRadius="10dp"
+        app:r2fillColor="@color/colorPrimary"
+        app:r2maxValue="100"
+        app:r2minValue="0"
+        app:r2minValueStep="1" />
 
 
     <TextView

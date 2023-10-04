@@ -28,6 +28,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 import com.newlifepartner.activity.ChatActivity
+import com.newlifepartner.activity.ChatHistoryActivity
 import com.newlifepartner.activity.NotificationActivity
 import com.newlifepartner.databinding.ActivityMainBinding
 import com.newlifepartner.modal.City
@@ -106,6 +107,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(Intent(this,NotificationActivity::class.java))
         }
 
+        binding.chat.setOnClickListener {
+            startActivity(Intent(this,ChatHistoryActivity::class.java))
+        }
+
 
     }
 
@@ -160,7 +165,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun setHomeIcon(){
         isBack = false
-        binding.location.visibility = View.VISIBLE
         binding.chat.visibility = View.VISIBLE
         binding.notification.visibility = View.VISIBLE
         binding.homeIcon.setImageDrawable(ResourcesCompat.getDrawable(resources,R.drawable.menu_icon,null))
