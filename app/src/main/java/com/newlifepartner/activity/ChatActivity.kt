@@ -1,5 +1,10 @@
 package com.newlifepartner.activity
 
+import android.app.NotificationManager
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -32,8 +37,10 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var usename:String
     private var socket:Socket? = null
     private var toId = ""
-
+    private val myReceiver = MyReceiver()
     val gson: Gson = Gson()
+    private lateinit var notificationManager : NotificationManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +49,7 @@ class ChatActivity : AppCompatActivity() {
         toId = intent.getStringExtra("UserID")!!
         usename = intent.getStringExtra("name")!!
         fromId = MySharedPreferences.getInstance(this).getStringValue(Constant.USER_ID)
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         chatList = ArrayList()
         chatRoomAdapter = ChatAdapter(this,chatList)
         binding.messageRv.adapter = chatRoomAdapter
@@ -76,6 +84,16 @@ class ChatActivity : AppCompatActivity() {
         }
 
     }
+
+    inner class MyReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action == "Message_received_chat") {
+                notificationManager.cancelAll()
+                getMessage()
+            }
+        }
+    }
+
 
     private var onConnect = Emitter.Listener {
         Log.d("TAG", ": Socket connected")
@@ -127,7 +145,7 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
-    private fun getMessage() {
+    fun getMessage() {
         lifecycleScope.launch(Dispatchers.IO+ ExceptionHandlerCoroutine.handler) {
             val response : ResultType<ResponseDashboard<ChatModal>> = safeApiCall { ApiService.retrofitService.getMessage(fromId,toId) }
             withContext(Dispatchers.Main) {
@@ -136,6 +154,7 @@ class ChatActivity : AppCompatActivity() {
                         if (response.value.status){
                             binding.msgBox.setText("")
                             chatRoomAdapter.updateList(response.value.data as ArrayList<ChatModal>)
+                            binding.messageRv.smoothScrollToPosition(response.value.data.size - 1)
                         }
                     }
                     is ResultType.Error -> {
@@ -154,10 +173,19 @@ class ChatActivity : AppCompatActivity() {
             chatList.add(message)
             chatRoomAdapter.notifyItemInserted(chatList.size)
             binding.msgBox.setText("")
-            binding.messageRv.scrollToPosition(chatList.size - 1) //move focus on last message
+            binding.messageRv.smoothScrollToPosition(chatList.size - 1) //move focus on last message
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(myReceiver, IntentFilter("Message_received_chat"))
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(myReceiver)
+    }
     override fun onDestroy() {
         super.onDestroy()
         socket?.let {

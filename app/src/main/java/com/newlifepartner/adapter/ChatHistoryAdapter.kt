@@ -1,10 +1,12 @@
 package com.newlifepartner.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.newlifepartner.R
+import com.newlifepartner.activity.ChatActivity
 import com.newlifepartner.databinding.ChatHistoryItemLayoutBinding
 import com.newlifepartner.databinding.NotificationItemLayBinding
 import com.newlifepartner.modal.ChatHistoryModal
@@ -33,6 +35,11 @@ class ChatHistoryAdapter(var list: ArrayList<ChatHistoryModal.Data>):RecyclerVie
             Glide.with(holder.itemView.context).load(data.image).into(holder.binding.userImage)
         }else{
             Glide.with(holder.itemView.context).load(R.drawable.img_front).into(holder.binding.userImage)
+        }
+
+        holder.itemView.setOnClickListener {
+            holder.itemView.context.startActivity(Intent(holder.itemView.context,ChatActivity::class.java).putExtra("UserID",list[position].userId)
+                .putExtra("name",list[position].name))
         }
 
     }

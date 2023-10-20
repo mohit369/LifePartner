@@ -18,6 +18,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.newlifepartner.MainActivity
 import com.newlifepartner.R
+import com.newlifepartner.activity.ChatActivity
 import com.newlifepartner.notification.NotificationUtils.isAppIsInBackground
 import org.json.JSONException
 import org.json.JSONObject
@@ -73,6 +74,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 }
                 val getImageUrl = notification.imageUrl
                 sendNotification(notification.title!!, notification.body!!, getImageUrl)
+                val intent = Intent("Message_received_chat")
+                sendBroadcast(intent)
             }
     }
 
